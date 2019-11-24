@@ -51,12 +51,16 @@ namespace ToDoApplication_SQL
         {
             string str = addNewToDoText.Text;
 
+            str = "test";
+
             SqlConnection con = new SqlConnection(constr);
             con.Open();
             try
             {
-                string sqlstr = "INSERT INTO todotext VALUES(${str})";
+                string sqlstr = "INSERT INTO ToDoTable(todotext) VALUES"
+                     + "(@todotext)";
                 SqlCommand cmd = new SqlCommand(sqlstr, con);
+                cmd.Parameters.Add(new SqlParameter("@todotext", str));
                 cmd.ExecuteNonQuery();
             }
             finally
